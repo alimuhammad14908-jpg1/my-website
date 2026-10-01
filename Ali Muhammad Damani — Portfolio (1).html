@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ali Muhammad Damani — AI, Design &amp; Data Freelancer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1B2B;
+    --surface: #152439;
+    --surface-2: #1B2D46;
+    --accent: #E8A33D;
+    --accent-dim: #8A6528;
+    --text: #F4EFE6;
+    --text-soft: #C9D3DF;
+    --text-muted: #8FA3BC;
+    --rule: #26395530;
+    --rule-strong: #2A3E5C;
+    font-size: 16px;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #0F1B2B;
+      --surface: #152439;
+      --text: #F4EFE6;
+    }
+  }
+
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  header.top {
+    padding: 28px 0 0;
+  }
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .top-row .mark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-soft);
+  }
+
+  .top-row .avail {
+    font-size: 0.85rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232,163,61,0.18);
+  }
+
+  .hero {
+    padding: 56px 0 40px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.1rem);
+    line-height: 1.08;
+    color: var(--text);
+  }
+
+  .hero .tagline {
+    margin-top: 18px;
+    font-size: 1.08rem;
+    color: var(--text-soft);
+    max-width: 32ch;
+  }
+
+  .hero-art {
+    width: 100%;
+    aspect-ratio: 1;
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+    animation: rise 0.9s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-art { animation: none; opacity: 1; transform: none; }
+  }
+
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .cta-row {
+    margin-top: 28px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 7px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    color: #14202f;
+  }
+  .btn.primary:hover { background: #f0b158; text-decoration: none; }
+
+  .btn.ghost {
+    border: 1px solid var(--rule-strong);
+    color: var(--text-soft);
+  }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  section { padding: 44px 0; border-top: 1px solid var(--rule); }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+  }
+
+  .section-head h2 {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-art { max-width: 220px; margin: 0 auto; }
+    .section-head { grid-template-columns: 1fr; gap: 10px; }
+  }
+
+  .about p { color: var(--text-soft); font-size: 1.02rem; max-width: 56ch; }
+
+  .services { display: flex; flex-direction: column; gap: 26px; }
+
+  .service {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .service:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .service svg { width: 26px; height: 26px; color: var(--accent); }
+
+  .service h3 { font-size: 1.08rem; color: var(--text); margin-bottom: 6px; }
+  .service p { margin: 0; color: var(--text-muted); font-size: 0.95rem; max-width: 48ch; }
+
+  .skills-list { display: flex; flex-direction: column; gap: 0; }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    gap: 12px;
+  }
+  .skill-row:last-child { border-bottom: none; }
+
+  .skill-name { font-weight: 500; color: var(--text); font-size: 0.98rem; }
+
+  .skill-bar {
+    width: 130px;
+    height: 5px;
+    background: var(--surface-2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .skill-bar > span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+  }
+
+  @media (max-width: 480px) {
+    .skill-bar { width: 80px; }
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 480px) { .facts { grid-template-columns: 1fr; } }
+
+  .fact-label { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px; }
+  .fact-val { font-size: 1rem; color: var(--text); }
+
+  footer {
+    padding: 44px 0 48px;
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  footer .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 20px;
+  }
+
+  .contact-item .fact-label { margin-bottom: 5px; }
+  .contact-item a { color: var(--text); font-size: 1.02rem; }
+  .contact-item a:hover { color: var(--accent); }
+
+  footer .signoff {
+    margin-top: 36px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  /* Chat widget */
+  #chat-toggle {
+    position: fixed;
+    right: max(20px, env(safe-area-inset-right, 0px));
+    bottom: max(20px, env(safe-area-inset-bottom, 0px));
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent);
+    color: #14202f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    z-index: 40;
+  }
+  #chat-toggle svg { width: 24px; height: 24px; }
+  #chat-toggle:hover { background: #f0b158; }
+
+  #chat-panel {
+    position: fixed;
+    right: max(20px, env(safe-area-inset-right, 0px));
+    bottom: max(86px, calc(env(safe-area-inset-bottom, 0px) + 86px));
+    width: min(340px, calc(100vw - 40px));
+    height: min(460px, calc(100vh - 160px));
+    background: var(--surface);
+    border: 1px solid var(--rule-strong);
+    border-radius: 14px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+    z-index: 41;
+  }
+  #chat-panel.open { display: flex; }
+
+  #chat-head {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--rule-strong);
+    background: var(--surface-2);
+  }
+  #chat-head-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--text); }
+  #chat-head-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+  #chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .chat-msg {
+    max-width: 85%;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+  }
+  .chat-msg.bot {
+    background: var(--surface-2);
+    color: var(--text-soft);
+    align-self: flex-start;
+    border-bottom-left-radius: 3px;
+  }
+  .chat-msg.user {
+    background: var(--accent);
+    color: #14202f;
+    align-self: flex-end;
+    border-bottom-right-radius: 3px;
+  }
+  .chat-msg.status {
+    align-self: flex-start;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-style: italic;
+  }
+  .chat-msg.error {
+    background: transparent;
+    color: #e0987a;
+    border: 1px solid #6b3b2a;
+    align-self: flex-start;
+  }
+
+  #chat-form {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid var(--rule-strong);
+  }
+  #chat-input {
+    flex: 1;
+    background: var(--surface-2);
+    border: 1px solid var(--rule-strong);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+  }
+  #chat-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #chat-input::placeholder { color: var(--text-muted); }
+
+  #chat-send {
+    width: 40px;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #14202f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  #chat-send:hover { background: #f0b158; }
+  #chat-send:disabled { opacity: 0.5; cursor: default; }
+  #chat-send svg { width: 17px; height: 17px; }
+
+  #chat-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 14px 12px;
+  }
+  .chat-chip {
+    background: transparent;
+    border: 1px solid var(--rule-strong);
+    color: var(--text-soft);
+    border-radius: 999px;
+    padding: 6px 11px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .chat-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 420px) {
+    #chat-panel { right: 12px; bottom: 82px; }
+    #chat-toggle { right: 12px; bottom: 14px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="wrap top-row">
+      <span class="mark">Ali Muhammad Damani</span>
+      <span class="avail"><span class="dot"></span>Open for Fiverr work</span>
+    </div>
+  </header>
+
+  <div class="wrap hero">
+    <div>
+      <h1>AI-powered work,<br>designed and organized&nbsp;well.</h1>
+      <p class="tagline">I help clients get things done faster using AI and AI agents — then finish the job with clean Photoshop edits and well-structured Excel work.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:alimuhammad.14908@gmail.com">Email me</a>
+        <a class="btn ghost" href="tel:03363006670">Call / WhatsApp</a>
+      </div>
+    </div>
+    <svg class="hero-art" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abstract mark combining a network, a brush stroke, and a grid">
+      <!-- grid (data/excel) -->
+      <g stroke="#2A3E5C" stroke-width="1.2" opacity="0.9">
+        <line x1="40" y1="60" x2="40" y2="230"/>
+        <line x1="80" y1="60" x2="80" y2="230"/>
+        <line x1="120" y1="60" x2="120" y2="230"/>
+        <line x1="40" y1="90" x2="150" y2="90"/>
+        <line x1="40" y1="130" x2="150" y2="130"/>
+        <line x1="40" y1="170" x2="150" y2="170"/>
+      </g>
+      <!-- brush stroke (design) -->
+      <path d="M120 220 C160 180, 150 120, 210 90 C240 76, 255 100, 235 120 C205 150, 190 195, 160 230 C150 240, 128 232, 120 220 Z"
+            fill="#8A6528" opacity="0.85"/>
+      <!-- network / AI nodes -->
+      <g>
+        <line x1="190" y1="70" x2="240" y2="50" stroke="#E8A33D" stroke-width="1.6" opacity="0.8"/>
+        <line x1="190" y1="70" x2="230" y2="110" stroke="#E8A33D" stroke-width="1.6" opacity="0.8"/>
+        <line x1="230" y1="110" x2="260" y2="150" stroke="#E8A33D" stroke-width="1.6" opacity="0.8"/>
+        <line x1="240" y1="50" x2="260" y2="150" stroke="#E8A33D" stroke-width="1.2" opacity="0.5"/>
+        <circle cx="190" cy="70" r="7" fill="#E8A33D"/>
+        <circle cx="240" cy="50" r="5" fill="#F4EFE6"/>
+        <circle cx="230" cy="110" r="6" fill="#F4EFE6"/>
+        <circle cx="260" cy="150" r="5" fill="#E8A33D"/>
+      </g>
+    </svg>
+  </div>
+
+  <section class="about">
+    <div class="wrap section-head">
+      <h2>About</h2>
+      <p>I'm a student building freelance skills around three things I'm genuinely good at: using AI tools to solve problems quickly, editing images cleanly in Photoshop, and organizing data in Excel so it's actually usable. I'm reliable, I communicate clearly, and I care about getting the details right — not just finishing fast.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-head">
+      <h2>Services</h2>
+      <div class="services">
+        <div class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg>
+          <div>
+            <h3>AI-assisted work &amp; content</h3>
+            <p>Using AI tools to speed up research, writing, problem-solving, and everyday tasks — with a human check on every result before it's delivered.</p>
+          </div>
+        </div>
+        <div class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="10" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.3" fill="currentColor" stroke="none"/><path d="M8 15c1 1 2 1.4 4 1.4s3-.4 4-1.4"/><path d="M12 4V1M9 1h6"/></svg>
+          <div>
+            <h3>AI agent setup</h3>
+            <p>Building and configuring AI agents that handle repetitive tasks, answer questions, or automate simple workflows for your business or personal use.</p>
+          </div>
+        </div>
+        <div class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5-4 4-3-3-5 5"/></svg>
+          <div>
+            <h3>Photo editing &amp; graphic design</h3>
+            <p>Retouching, background removal, image cleanup, and simple graphic design work in Adobe Photoshop.</p>
+          </div>
+        </div>
+        <div class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          <div>
+            <h3>Excel &amp; data organization</h3>
+            <p>Data entry, cleanup, formulas, and formatting to turn messy spreadsheets into something clear and usable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-head">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <div class="skill-row">
+          <span class="skill-name">Artificial Intelligence</span>
+          <div class="skill-bar"><span style="width:95%"></span></div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">AI Agents</span>
+          <div class="skill-bar"><span style="width:85%"></span></div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Adobe Photoshop</span>
+          <div class="skill-bar"><span style="width:70%"></span></div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Microsoft Excel</span>
+          <div class="skill-bar"><span style="width:65%"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-head">
+      <h2>Background</h2>
+      <div class="facts">
+        <div>
+          <div class="fact-label">Education</div>
+          <div class="fact-val">Intermediate</div>
+        </div>
+        <div>
+          <div class="fact-label">Languages</div>
+          <div class="fact-val">Urdu (native), English (working)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <h2 style="color: var(--text-muted); font-size: 1.15rem; font-weight: 500;">Get in touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="fact-label">Phone / WhatsApp</div>
+          <a href="tel:03363006670">0336 3006670</a>
+        </div>
+        <div class="contact-item">
+          <div class="fact-label">Email</div>
+          <a href="mailto:alimuhammad.14908@gmail.com">alimuhammad.14908@gmail.com</a>
+        </div>
+      </div>
+      <div class="signoff">Ali Muhammad Damani — available for AI, Photoshop, and Excel work on Fiverr.</div>
+    </div>
+  </footer>
+  <!-- Chat widget -->
+  <div id="chat-root">
+    <button id="chat-toggle" aria-expanded="false" aria-controls="chat-panel" aria-label="Chat with Ali's assistant">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" id="chat-icon-open"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" id="chat-icon-close" style="display:none"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+    </button>
+
+    <div id="chat-panel" role="dialog" aria-label="Chat with Ali's assistant" aria-hidden="true">
+      <div id="chat-head">
+        <div>
+          <div id="chat-head-title">Ask about my services</div>
+          <div id="chat-head-sub">Answers as Ali's assistant · usually instant</div>
+        </div>
+      </div>
+      <div id="chat-messages" aria-live="polite">
+        <div class="chat-msg bot">Hi! I can answer questions about Ali's AI, AI agent, Photoshop, and Excel services — what would you like to know?</div>
+      </div>
+      <div id="chat-chips" aria-label="Suggested questions"></div>
+      <form id="chat-form" autocomplete="off">
+        <input id="chat-input" type="text" placeholder="Type a question…" aria-label="Your message" />
+        <button id="chat-send" type="submit" aria-label="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('chat-toggle');
+      const panel = document.getElementById('chat-panel');
+      const iconOpen = document.getElementById('chat-icon-open');
+      const iconClose = document.getElementById('chat-icon-close');
+      const messagesEl = document.getElementById('chat-messages');
+      const chipsEl = document.getElementById('chat-chips');
+      const form = document.getElementById('chat-form');
+      const input = document.getElementById('chat-input');
+      const sendBtn = document.getElementById('chat-send');
+
+      const SYSTEM_PROMPT = "You are a friendly assistant on Ali Muhammad Damani's freelance portfolio website. Ali is a Fiverr freelancer offering four services: (1) AI-assisted work and content — using AI tools for research, writing, and problem-solving, (2) AI agent setup — building and configuring AI agents for task automation and simple workflows, (3) Photo editing and graphic design in Adobe Photoshop — retouching, background removal, image cleanup, (4) Excel and data organization — data entry, cleanup, formulas, formatting. Ali is a student, education level Intermediate, skills include AI (expert level), AI agents, Photoshop, and Excel. Languages: Urdu (native), English (working proficiency). Contact: phone/WhatsApp 0336 3006670, email alimuhammad.14908@gmail.com. Answer visitor questions about these services helpfully and briefly (2-4 sentences unless more detail is asked for). If asked something unrelated to Ali's services or freelance work, gently redirect to what Ali offers. If a visitor seems ready to hire, encourage them to reach out via email or WhatsApp. Never invent services, prices, or experience Ali doesn't have — if unsure, suggest they ask Ali directly.";
+
+      // KB-START
+      // Built-in answers: this is what lets the assistant work anywhere (local file, any web host),
+      // with no server or API key. Everything here comes from the portfolio page itself.
+      const CONTACT = "You can email alimuhammad.14908@gmail.com or call / WhatsApp 0336 3006670. Ali is also open for work on Fiverr.";
+      const KB = [
+        { keys: [/\b(hi|hello|hey|salam|assalam\w*|aoa)\b/i],
+          a: "Hello! I can tell you about Ali's services, skills, or how to hire him. What would you like to know?" },
+        { keys: [/service|offer|what (can|do) (you|he|ali)|help (me )?with|what does ali/i],
+          a: "Ali offers four services:\n1. AI-assisted work and content\n2. AI agent setup\n3. Photo editing and graphic design in Photoshop\n4. Excel and data organization\n\nAsk me about any of them for details." },
+        { keys: [/agent/i, /automat|chatbot|workflow|\bbot\b|repetitive/i],
+          a: "Ali builds and configures AI agents that handle repetitive tasks, answer questions, or automate simple workflows for a business or for personal use. Tell him what you want the agent to do and he can tell you what's possible." },
+        { keys: [/\bai\b|artificial|research|writing|content|chatgpt|prompt/i],
+          a: "Ali uses AI tools to speed up research, writing, problem-solving, and everyday tasks. He checks every result himself before delivering it." },
+        { keys: [/photoshop|photo|image|retouch|background|graphic|design|edit/i],
+          a: "In Adobe Photoshop, Ali does retouching, background removal, image cleanup, and simple graphic design work." },
+        { keys: [/excel|spreadsheet|formula|\bdata\b|\bsheet|csv|entry|cleanup|clean up|organi[sz]/i],
+          a: "For Excel and data, Ali does data entry, cleanup, formulas, and formatting, turning messy spreadsheets into something clear and usable." },
+        { keys: [/skill|expert|proficien|good at|strong|level/i],
+          a: "Ali's strongest areas are AI and AI agents, backed by Photoshop and Excel skills. For anything specific, ask him directly and he can tell you if it's a fit." },
+        { keys: [/experience|portfolio|past work|previous|projects|reviews|clients/i],
+          a: "Ali is a student building his freelance skills. I don't have details on past projects here, so ask him directly if you want examples before you order." },
+        { keys: [/educat|student|study|qualif|degree|intermediate/i],
+          a: "Ali is a student with Intermediate-level education." },
+        { keys: [/language|urdu|english|speak|communicat/i],
+          a: "Ali speaks Urdu (native) and English (working proficiency)." },
+        { keys: [/price|cost|rate|charge|how much|budget|cheap|fee|quote/i],
+          a: "I don't have fixed prices to share. The price depends on the task, so send Ali the details and ask him for a quote.\n\n" },
+        { keys: [/deliver|turnaround|how long|deadline|urgent|how fast|\bdays\b/i],
+          a: "I don't have exact turnaround times because they depend on the task. Tell Ali what you need and your deadline when you contact him." },
+        { keys: [/availab|open for|free to|taking (new )?(orders|work|clients)/i],
+          a: "Yes, Ali is currently open for Fiverr work." },
+        { keys: [/hire|contact|email|phone|whatsapp|call|reach|order|fiverr|get started|start|book|message/i],
+          a: "" },
+        { keys: [/\b(thanks|thank you|thx|great|awesome|cool|ok|okay|nice)\b/i],
+          a: "You're welcome! If you'd like to work with Ali, just reach out." }
+      ];
+      const FALLBACK = "I can only help with questions about Ali's services. Try asking about AI agents, Photoshop, Excel, or how to hire him.";
+      const PRICE_IDX = KB.findIndex(k => /price/.test(k.keys[0].source));
+      const HIRE_IDX = KB.findIndex(k => /hire/.test(k.keys[0].source));
+      KB[PRICE_IDX].a += CONTACT;
+      KB[HIRE_IDX].a = CONTACT + " Tell him what you need and he'll tell you the best way to do it.";
+
+      function localAnswer(q) {
+        let best = null, bestScore = 0;
+        for (const item of KB) {
+          let score = 0;
+          for (const re of item.keys) if (re.test(q)) score++;
+          if (score > bestScore) { best = item; bestScore = score; }
+        }
+        return best ? best.a : FALLBACK;
+      }
+      // KB-END
+
+      const CHIPS = [
+        "What services do you offer?",
+        "Tell me about AI agents",
+        "Photoshop work",
+        "Excel help",
+        "How do I hire Ali?"
+      ];
+
+      let sample = null, llmChecked = false;
+      let turns = [];
+      let inFlight = false;
+
+      function addMessage(text, cls) {
+        const div = document.createElement('div');
+        div.className = 'chat-msg ' + cls;
+        div.textContent = text;
+        messagesEl.appendChild(div);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        return div;
+      }
+
+      function setOpen(open) {
+        panel.classList.toggle('open', open);
+        panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        iconOpen.style.display = open ? 'none' : '';
+        iconClose.style.display = open ? '' : 'none';
+        if (open) input.focus();
+      }
+
+      toggle.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
+
+      // Use the hosted AI model when this page runs somewhere that provides it;
+      // otherwise (local file, ordinary web host) the built-in answers above are used.
+      async function getSample() {
+        if (llmChecked) return sample;
+        llmChecked = true;
+        try {
+          if (typeof window.claude !== 'undefined' && window.claude && typeof window.claude.use === 'function') {
+            sample = await window.claude.use('sample');
+          }
+        } catch (err) { sample = null; }
+        return sample;
+      }
+
+      function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+      CHIPS.forEach(label => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'chat-chip';
+        b.textContent = label;
+        b.addEventListener('click', () => ask(label));
+        chipsEl.appendChild(b);
+      });
+
+      async function ask(text) {
+        text = (text || '').trim();
+        if (!text || inFlight) return;
+        inFlight = true;
+        sendBtn.disabled = true;
+        chipsEl.style.display = 'none';
+
+        addMessage(text, 'user');
+        input.value = '';
+        const statusEl = addMessage('Thinking…', 'status');
+
+        let answered = false;
+        const llm = await getSample();
+        if (llm) {
+          turns.push({ role: 'user', content: text });
+          let botEl = null;
+          try {
+            const { text: answer } = await llm(
+              [{ role: 'user', content: SYSTEM_PROMPT }, ...turns],
+              {
+                onText: ({ text: whole }) => {
+                  if (!botEl) { statusEl.remove(); botEl = addMessage('', 'bot'); }
+                  botEl.textContent = whole;
+                  messagesEl.scrollTop = messagesEl.scrollHeight;
+                }
+              }
+            );
+            turns.push({ role: 'assistant', content: answer });
+            answered = true;
+          } catch (err) {
+            if (turns.length && turns[turns.length - 1].role === 'user') turns.pop();
+            if (botEl) botEl.remove();
+          }
+        }
+
+        if (!answered) {
+          await sleep(500);
+          statusEl.remove();
+          addMessage(localAnswer(text), 'bot');
+        }
+
+        inFlight = false;
+        sendBtn.disabled = false;
+        input.focus();
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        ask(input.value);
+      });
+    })();
+  </script>
+
+</body>
+</html>
